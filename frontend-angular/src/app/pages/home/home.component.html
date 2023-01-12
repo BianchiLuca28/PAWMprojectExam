@@ -1,0 +1,22 @@
+<mat-sidenav-container [autosize]="true" class="example-container">
+  <mat-sidenav mode="side" opened style="padding: 16px">
+    <mat-nav-list>
+      <a mat-list-item routerLink=".">Lista Note</a>
+    </mat-nav-list>
+    <mat-nav-list>
+      <a mat-list-item routerLink=".">Cronologia Operazioni Note</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content style="padding: 16px">
+    <mat-grid-list
+      *ngIf="notes && notes.length"
+      [cols]="cols"
+      [rowHeight]="rowHeight"
+      gutterSize="16"
+    >
+      <mat-grid-tile *ngFor="let note of notes">
+        <app-note-item [note]="note"></app-note-item>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-sidenav-content>
+</mat-sidenav-container>
