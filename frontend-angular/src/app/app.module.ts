@@ -26,9 +26,17 @@ import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { NoteItemComponent } from './pages/home/components/note-item/note-item.component';
+import { MaterialElevationDirective } from './material-elevation.directive';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, HomeComponent, LoginComponent, NoteItemComponent],
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    HomeComponent,
+    LoginComponent,
+    NoteItemComponent,
+    MaterialElevationDirective,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

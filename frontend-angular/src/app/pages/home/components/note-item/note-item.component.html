@@ -1,9 +1,13 @@
-<mat-card *ngIf="note">
+<mat-card *ngIf="note" appMaterialElevation class="mat-card-class">
   <mat-card-header>
     <mat-card-title>{{ note.title }}</mat-card-title>
   </mat-card-header>
   <mat-divider></mat-divider>
-  <mat-card-content>
+  <mat-card-content style="padding: 20px">
     <p>{{ note.content }}</p>
   </mat-card-content>
+  <mat-divider></mat-divider>
+  <mat-card-actions align="end">
+    <button mat-button>MODIFY</button>
+  </mat-card-actions>
 </mat-card>

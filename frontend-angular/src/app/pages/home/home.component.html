@@ -15,7 +15,9 @@
       gutterSize="16"
     >
       <mat-grid-tile *ngFor="let note of notes">
-        <app-note-item [note]="note"></app-note-item>
+        <div appMaterialElevation style="width: 90%">
+          <app-note-item [note]="note"></app-note-item>
+        </div>
       </mat-grid-tile>
     </mat-grid-list>
   </mat-sidenav-content>
