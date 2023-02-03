@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
@@ -27,6 +27,9 @@ import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { NoteItemComponent } from './pages/home/components/note-item/note-item.component';
 import { MaterialElevationDirective } from './material-elevation.directive';
+import { RegisterComponent } from './pages/register/register.component';
+import { JwtInterceptor } from './helpers/jwt.interceptor';
+import { ErrorInterceptor } from './helpers/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -36,11 +39,15 @@ import { MaterialElevationDirective } from './material-elevation.directive';
     LoginComponent,
     NoteItemComponent,
     MaterialElevationDirective,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
     MatTabsModule,
     MatIconModule,
     MatSidenavModule,
@@ -57,7 +64,10 @@ import { MaterialElevationDirective } from './material-elevation.directive';
     MatFormFieldModule,
     MatSelectModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
