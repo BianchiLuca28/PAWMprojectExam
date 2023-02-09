@@ -1,6 +1,17 @@
-header {
+toolbar-container {
   display: flex;
   justify-content: space-between;
-  align-items: center;
   margin-bottom: 20px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
+a:visited {
+  color: #fff;
 }

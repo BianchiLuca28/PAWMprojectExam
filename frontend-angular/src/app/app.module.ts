@@ -17,6 +17,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -30,6 +31,11 @@ import { MaterialElevationDirective } from './material-elevation.directive';
 import { RegisterComponent } from './pages/register/register.component';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { ErrorInterceptor } from './helpers/error.interceptor';
+import { ViewNoteComponent } from './pages/home/components/view-note/view-note.component';
+import { NotesComponent } from './pages/home/components/notes/notes.component';
+import { AddNoteComponent } from './pages/home/components/add-note/add-note.component';
+import { LogsComponent } from './pages/home/components/logs/logs.component';
+import { ModifyNoteComponent } from './pages/home/components/modify-note/modify-note.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +46,11 @@ import { ErrorInterceptor } from './helpers/error.interceptor';
     NoteItemComponent,
     MaterialElevationDirective,
     RegisterComponent,
+    ViewNoteComponent,
+    NotesComponent,
+    AddNoteComponent,
+    LogsComponent,
+    ModifyNoteComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,6 +73,7 @@ import { ErrorInterceptor } from './helpers/error.interceptor';
     MatBadgeModule,
     MatSnackBarModule,
     MatFormFieldModule,
+    MatInputModule,
     MatSelectModule,
   ],
   providers: [

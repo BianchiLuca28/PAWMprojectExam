@@ -1,0 +1,17 @@
+<mat-card *ngIf="note">
+  <mat-card-header class="card-title">
+    <mat-card-title>{{ note.title }}</mat-card-title>
+    <div>
+      <button mat-raised-button color="accent" (click)="onModify()">
+        MODIFICA
+      </button>
+      <button mat-raised-button color="warn" (click)="onDelete()">
+        ELIMINA
+      </button>
+    </div>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <mat-card-content class="card-content">
+    <p class="card-content">{{ note.content }}</p>
+  </mat-card-content>
+</mat-card>

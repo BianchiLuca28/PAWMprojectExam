@@ -1,5 +1,14 @@
-.example-container {
-  min-height: 100vh;
+.sidenav-container {
+  min-height: 95vh;
   min-width: 100vh;
+  width: 100%;
   border: 1px;
+}
+
+.sidenav {
+  min-width: 300px;
+}
+
+a {
+  margin: 0px;
 }

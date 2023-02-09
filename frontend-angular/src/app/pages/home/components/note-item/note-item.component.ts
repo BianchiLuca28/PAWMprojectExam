@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { Note } from 'src/app/models/note.model';
 
 @Component({
@@ -6,10 +7,12 @@ import { Note } from 'src/app/models/note.model';
   templateUrl: './note-item.component.html',
   styleUrls: ['./note-item.component.scss'],
 })
-export class NoteItemComponent implements OnInit {
+export class NoteItemComponent {
   @Input() note: Note | undefined;
 
-  constructor() {}
+  constructor(private router: Router) {}
 
-  ngOnInit(): void {}
+  onClick() {
+    if (this.note) this.router.navigate(['/home/notes', this.note._id]);
+  }
 }

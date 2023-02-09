@@ -38,6 +38,7 @@ export class AuthService {
 
             localStorage.setItem('jwt-token', JSON.stringify(user));
             this.currentUserSubject.next(user);
+            console.log('Token aggiunto');
           }
 
           return user;
@@ -49,5 +50,13 @@ export class AuthService {
     localStorage.removeItem('jwt-token');
     this.currentUserSubject.next(null);
     this.router.navigate(['/login']);
+  }
+
+  register(email: string, password: string, username: string) {
+    return this.http.post<any>(`${environment.baseUrl}/auth/register`, {
+      email,
+      password,
+      username,
+    });
   }
 }

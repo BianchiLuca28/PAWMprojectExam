@@ -1,24 +1,11 @@
-<mat-sidenav-container [autosize]="true" class="example-container">
-  <mat-sidenav mode="side" opened style="padding: 16px">
-    <mat-nav-list>
-      <a mat-list-item routerLink="/home">Lista Note</a>
+<mat-sidenav-container [autosize]="true" class="sidenav-container">
+  <mat-sidenav mode="side" opened class="sidenav">
+    <mat-nav-list routerLink="/home/notes" style="margin-top: 15px">
+      <a mat-list-item>Lista Note</a>
     </mat-nav-list>
-    <mat-nav-list>
-      <a mat-list-item routerLink="/logs">Cronologia Operazioni Note</a>
+    <mat-nav-list routerLink="/home/logs">
+      <a mat-list-item>Cronologia Operazioni Note</a>
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content style="padding: 16px">
-    <mat-grid-list
-      *ngIf="notes && notes.length"
-      [cols]="cols"
-      [rowHeight]="rowHeight"
-      gutterSize="16"
-    >
-      <mat-grid-tile *ngFor="let note of notes">
-        <div appMaterialElevation style="width: 90%">
-          <app-note-item [note]="note"></app-note-item>
-        </div>
-      </mat-grid-tile>
-    </mat-grid-list>
-  </mat-sidenav-content>
+  <router-outlet></router-outlet>
 </mat-sidenav-container>

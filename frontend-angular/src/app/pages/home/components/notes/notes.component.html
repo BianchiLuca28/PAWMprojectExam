@@ -1,0 +1,22 @@
+<mat-card class="card-content-class">
+  <button
+    mat-flat-button
+    color="primary"
+    class="add-button"
+    routerLink="/home/add-note"
+  >
+    Aggiungi Nuova Nota
+  </button>
+  <mat-grid-list
+    *ngIf="notes && notes.length"
+    [cols]="cols"
+    [rowHeight]="rowHeight"
+    gutterSize="16"
+  >
+    <mat-grid-tile *ngFor="let note of notes">
+      <div appMaterialElevation style="width: 90%">
+        <app-note-item [note]="note"></app-note-item>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</mat-card>

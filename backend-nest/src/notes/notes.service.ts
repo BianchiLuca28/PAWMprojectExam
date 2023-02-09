@@ -3,11 +3,14 @@ import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { NoteDocument, Note } from './schemas/note.schema';
 import { CreateNoteDto } from './dto/create-note.dto';
+import { LogsService } from 'src/logs/logs.service';
+import logsOperations from 'src/logs/logsOperations';
 
 @Injectable()
 export class NotesService {
   constructor(
     @InjectModel(Note.name) private readonly noteModel: Model<NoteDocument>,
+    private readonly logsService: LogsService,
   ) {}
 
   async findAll(ownerUserId: string): Promise<Note[]> {
@@ -24,7 +27,16 @@ export class NotesService {
       content: note.content,
       owner: ownerUserId,
     });
-    return await newNote.save();
+
+    const createdNote = await newNote.save();
+    if (createdNote)
+      await this.logsService.create(
+        createdNote._id,
+        createdNote,
+        logsOperations.addNote,
+      );
+
+    return createdNote;
   }
 
   async delete(noteId: string, ownerUserId: string): Promise<Note> {
@@ -35,7 +47,16 @@ export class NotesService {
     if (!noteValid) {
       throw new HttpException('Invalid token', HttpStatus.UNAUTHORIZED);
     }
-    return await this.noteModel.findByIdAndRemove(noteId);
+
+    const removedNote = await this.noteModel.findByIdAndRemove(noteId);
+    if (removedNote)
+      await this.logsService.create(
+        removedNote._id,
+        removedNote,
+        logsOperations.removeNote,
+      );
+
+    return removedNote;
   }
 
   async update(
@@ -51,7 +72,7 @@ export class NotesService {
       throw new HttpException('Invalid token', HttpStatus.UNAUTHORIZED);
     }
 
-    return await this.noteModel.findOneAndUpdate(
+    const updatedNote = await this.noteModel.findOneAndUpdate(
       { _id: noteId },
       {
         $set: {
@@ -61,5 +82,12 @@ export class NotesService {
         },
       },
     );
+    await this.logsService.create(
+      updatedNote._id,
+      updatedNote,
+      logsOperations.updateNote,
+    );
+
+    return updatedNote;
   }
 }

@@ -1,6 +1,8 @@
 export interface Note {
-  id: number;
+  _id: string;
   title: string;
   content: string;
-  //data creazione e data ultima modifica
+  owner: string;
+  createdOnDate: Date;
+  updatedOnDate: Date;
 }

@@ -1,1 +1,45 @@
-<p>register works!</p>
+<mat-card class="register-card">
+  <mat-card-content>
+    <form class="wrapper" (ngSubmit)="onSubmit()" autocomplete="off">
+      <h1>Registrazione</h1>
+
+      <mat-form-field appearance="outline">
+        <mat-label for="email">Email</mat-label>
+        <input
+          matInput
+          [(ngModel)]="email"
+          type="text"
+          id="email"
+          name="email"
+          required
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label for="username">Username</mat-label>
+        <input
+          matInput
+          [(ngModel)]="username"
+          type="text"
+          id="username"
+          name="username"
+          required
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label for="password">Password</mat-label>
+        <input
+          matInput
+          [(ngModel)]="password"
+          type="password"
+          id="password"
+          name="password"
+          required
+        />
+      </mat-form-field>
+
+      <button mat-raised-button color="primary">Registrati</button>
+    </form>
+  </mat-card-content>
+</mat-card>

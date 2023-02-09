@@ -1,0 +1,26 @@
+.card-title {
+  display: flex;
+  width: auto;
+  justify-content: space-between;
+  background-color: rgb(241, 241, 241);
+}
+
+.card-title button {
+  margin-bottom: 15px;
+  margin-right: 20px;
+  margin-left: 10px;
+}
+
+.card-content {
+  overflow: auto;
+  min-height: 93vh;
+  height: auto;
+  background-color: rgb(252, 252, 252);
+}
+
+.card-content form {
+  margin-top: 25px;
+  font-size: medium;
+  display: flex;
+  flex-direction: column;
+}

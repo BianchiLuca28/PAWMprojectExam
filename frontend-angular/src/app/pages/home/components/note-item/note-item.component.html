@@ -1,10 +1,21 @@
-<mat-card *ngIf="note" appMaterialElevation class="mat-card-class">
+<mat-card
+  *ngIf="note"
+  appMaterialElevation
+  class="mat-card-class"
+  (click)="onClick()"
+>
   <mat-card-header>
     <mat-card-title>{{ note.title }}</mat-card-title>
   </mat-card-header>
   <mat-divider></mat-divider>
   <mat-card-content style="padding: 20px">
-    <p>{{ note.content }}</p>
+    <p>
+      {{
+        note.content.length > 240
+          ? (note.content | slice : 0 : 240) + "..."
+          : note.content
+      }}
+    </p>
   </mat-card-content>
   <mat-divider></mat-divider>
   <mat-card-actions align="end">

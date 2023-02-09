@@ -15,6 +15,9 @@ export class LoginComponent implements OnInit {
   returnUrl: string = '';
   error: string = '';
 
+  email: string = '';
+  password: string = '';
+
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly route: ActivatedRoute,
@@ -27,10 +30,12 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loginForm = this.formBuilder.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required],
-    });
+    // this.loginForm = this.formBuilder.group({
+    //   email: ['', Validators.required],
+    //   password: ['', Validators.required],
+    // });
+    this.email = '';
+    this.password = '';
   }
 
   get f() {
@@ -41,14 +46,14 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
 
     // stop here if form is invalid
-    if (this.loginForm.invalid) {
-      return;
-    }
+    // if (this.loginForm.invalid) {
+    //   return;
+    // }
 
     // NOTA: Questa parte è un po' diversa
     this.error = '';
     this.authService
-      .login(this.f['email'].value, this.f['password'].value)
+      .login(this.email, this.password)
       .pipe(first())
       .subscribe(
         (data) => {

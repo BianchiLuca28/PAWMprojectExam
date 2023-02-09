@@ -1,14 +1,11 @@
-<mat-toolbar
-  style="justify-content: space-between; margin-left: auto; margin-right: auto"
-  color="primary"
->
-  <a routerLink="/home">Il mio Blocco Note</a>
+<mat-toolbar class="toolbar-container" color="primary">
+  <a routerLink="/">Il mio Blocco Note</a>
   <button
     mat-mini-fab
     [matMenuTriggerFor]="beforeMenu"
     color="accent"
     aria-label="Button for user account"
-    style="margin-right: 20px"
+    style="margin-right: 20px; margin-left: auto"
   >
     <mat-icon>perm_identity</mat-icon>
   </button>
