@@ -27,7 +27,6 @@ export class AddNoteComponent {
     };
 
     this.noteService.addNote(newNote).subscribe((note) => {
-      alert('Nota aggiunta ha ID: ' + note._id);
       this.router.navigate([this.returnUrl]);
     });
   }

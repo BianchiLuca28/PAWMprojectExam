@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
-import { Observable, BehaviorSubject, map } from 'rxjs';
+import { Observable, BehaviorSubject, map, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 
@@ -10,7 +10,9 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   private currentUserSubject: BehaviorSubject<User | null>;
-  public currentUser: Observable<User | null>;
+  private currentUser: Observable<User | null>;
+  private subject = new Subject<any>();
+  private isLoggedIn: boolean = false;
 
   constructor(
     private readonly router: Router,
@@ -33,12 +35,10 @@ export class AuthService {
         map((user) => {
           // login successful if there's a jwt token in the response
           if (user && user.accessToken) {
-            // store; user; details; and; jwt; token in local
-            // storage; to; keep; user; logged in between; page; refreshes;
-
             localStorage.setItem('jwt-token', JSON.stringify(user));
             this.currentUserSubject.next(user);
-            console.log('Token aggiunto');
+            this.isLoggedIn = !this.isLoggedIn;
+            this.subject.next(this.isLoggedIn);
           }
 
           return user;
@@ -49,6 +49,8 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('jwt-token');
     this.currentUserSubject.next(null);
+    this.isLoggedIn = !this.isLoggedIn;
+    this.subject.next(this.isLoggedIn);
     this.router.navigate(['/login']);
   }
 
@@ -58,5 +60,9 @@ export class AuthService {
       password,
       username,
     });
+  }
+
+  onLogin(): Observable<any> {
+    return this.subject.asObservable();
   }
 }

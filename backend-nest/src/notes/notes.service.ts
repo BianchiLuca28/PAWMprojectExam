@@ -5,6 +5,7 @@ import { NoteDocument, Note } from './schemas/note.schema';
 import { CreateNoteDto } from './dto/create-note.dto';
 import { LogsService } from 'src/logs/logs.service';
 import logsOperations from 'src/logs/logsOperations';
+import { sanitize, sanitizeMongo } from 'src/shared/utils';
 
 @Injectable()
 export class NotesService {
@@ -18,13 +19,16 @@ export class NotesService {
   }
 
   async findOne(noteId: string, ownerUserId: string): Promise<Note> {
-    return await this.noteModel.findOne({ _id: noteId, owner: ownerUserId });
+    return await this.noteModel.findOne({
+      _id: sanitize(sanitizeMongo(JSON.stringify(noteId))),
+      owner: ownerUserId,
+    });
   }
 
   async create(note: CreateNoteDto, ownerUserId: string): Promise<Note> {
     const newNote = new this.noteModel({
-      title: note.title,
-      content: note.content,
+      title: sanitize(note.title),
+      content: sanitize(note.content),
       owner: ownerUserId,
     });
 
@@ -41,14 +45,16 @@ export class NotesService {
 
   async delete(noteId: string, ownerUserId: string): Promise<Note> {
     const noteValid = await this.noteModel.findOne({
-      _id: noteId,
+      _id: sanitize(sanitizeMongo(JSON.stringify(noteId))),
       owner: ownerUserId,
     });
     if (!noteValid) {
-      throw new HttpException('Invalid token', HttpStatus.UNAUTHORIZED);
+      throw new HttpException('Invalid note', HttpStatus.BAD_REQUEST);
     }
 
-    const removedNote = await this.noteModel.findByIdAndRemove(noteId);
+    const removedNote = await this.noteModel.findByIdAndRemove(
+      sanitize(sanitizeMongo(JSON.stringify(noteId))),
+    );
     if (removedNote)
       await this.logsService.create(
         removedNote._id,
@@ -64,20 +70,21 @@ export class NotesService {
     note: CreateNoteDto,
     ownerUserId: string,
   ): Promise<Note> {
+    const sanitizedNoteId = sanitize(sanitizeMongo(JSON.stringify(noteId)));
     const noteValid = await this.noteModel.findOne({
-      _id: noteId,
+      _id: sanitizedNoteId,
       owner: ownerUserId,
     });
     if (!noteValid) {
-      throw new HttpException('Invalid token', HttpStatus.UNAUTHORIZED);
+      throw new HttpException('Invalid note', HttpStatus.BAD_REQUEST);
     }
 
     const updatedNote = await this.noteModel.findOneAndUpdate(
-      { _id: noteId },
+      { _id: sanitizedNoteId },
       {
         $set: {
-          title: note.title,
-          content: note.content,
+          title: sanitize(note.title),
+          content: sanitize(note.content),
           updatedOnDate: new Date().toISOString(),
         },
       },

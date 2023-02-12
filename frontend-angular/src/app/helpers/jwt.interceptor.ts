@@ -3,7 +3,6 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HTTP_INTERCEPTORS,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
@@ -19,8 +18,6 @@ export class JwtInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     // add authorization header with jwt token if available
     const currentUser = this.authService.currentUserValue;
-
-    // NOTA: Questa cambia un po'
 
     if (currentUser && currentUser.accessToken) {
       request = request.clone({

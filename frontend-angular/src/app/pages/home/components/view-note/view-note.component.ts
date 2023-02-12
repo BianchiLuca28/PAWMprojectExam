@@ -20,7 +20,6 @@ export class ViewNoteComponent implements OnInit {
 
   ngOnInit(): void {
     const noteId = this.route.snapshot.paramMap.get('id');
-    console.log(noteId);
     if (noteId)
       this.noteService.getNote(noteId).subscribe((note) => (this.note = note));
   }
@@ -32,7 +31,6 @@ export class ViewNoteComponent implements OnInit {
   onDelete(): void {
     if (this.note) {
       this.noteService.deleteNote(this.note._id).subscribe((note) => {
-        alert('Nota eliminata correttamente');
         this.router.navigate([this.returnUrl]);
       });
     }

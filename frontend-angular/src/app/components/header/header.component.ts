@@ -1,14 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
-  title: string = 'Notes Application';
+export class HeaderComponent {
+  isUserLoggedIn: boolean = false;
+  subscription: Subscription;
 
-  constructor() {}
+  constructor(private authService: AuthService) {
+    this.subscription = this.authService
+      .onLogin()
+      .subscribe((value) => (this.isUserLoggedIn = value));
+  }
 
-  ngOnInit(): void {}
+  logoutClickButton(): void {
+    this.authService.logout();
+  }
 }

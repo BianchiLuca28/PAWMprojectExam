@@ -59,7 +59,6 @@ export class AuthService {
     const expiresIn = constants.expiryTimeJwt;
 
     const userJwt: JwtPayload = {
-      // userId: _id,
       email: email,
       username: username,
     };

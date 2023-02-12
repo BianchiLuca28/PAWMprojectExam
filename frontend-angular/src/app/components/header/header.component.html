@@ -11,10 +11,13 @@
   </button>
   <mat-menu #beforeMenu="matMenu">
     <button mat-menu-item routerLink="/login">
-      <span>Account</span>
+      <span>{{ isUserLoggedIn ? "Account" : "Login" }}</span>
     </button>
-    <button mat-menu-item disabled>
+    <button *ngIf="isUserLoggedIn" mat-menu-item (click)="logoutClickButton()">
       <span>Logout</span>
+    </button>
+    <button *ngIf="!isUserLoggedIn" mat-menu-item routerLink="/register">
+      <span>Registrati</span>
     </button>
   </mat-menu>
 </mat-toolbar>

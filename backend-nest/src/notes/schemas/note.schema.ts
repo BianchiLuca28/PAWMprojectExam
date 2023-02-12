@@ -6,13 +6,6 @@ export type NoteDocument = Note & Document;
 
 @Schema()
 export class Note {
-  // @Prop({
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   required: true,
-  //   auto: true,
-  // })
-  // _id: mongoose.Schema.Types.ObjectId;
-
   @Prop({ required: true })
   title: string;
 

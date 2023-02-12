@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AddNote } from 'src/app/models/addNote.model';
-import { Note } from 'src/app/models/note.model';
 import { NoteService } from 'src/app/services/note.service';
 
 @Component({
@@ -46,7 +45,6 @@ export class ModifyNoteComponent implements OnInit {
     this.noteService
       .updateNote(this.noteId, this.modifiedNote)
       .subscribe((note) => {
-        alert('Nota modificata');
         this.router.navigate([this.returnUrl]);
       });
   }

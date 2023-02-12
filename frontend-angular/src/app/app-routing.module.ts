@@ -21,7 +21,6 @@ const routes: Routes = [
         component: NotesComponent,
       },
       {
-        // Considera cambiare la route per passare direttamente la nota
         path: 'notes/:id',
         component: ViewNoteComponent,
       },

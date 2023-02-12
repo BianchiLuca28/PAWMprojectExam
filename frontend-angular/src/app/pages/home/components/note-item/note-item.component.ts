@@ -15,4 +15,8 @@ export class NoteItemComponent {
   onClick() {
     if (this.note) this.router.navigate(['/home/notes', this.note._id]);
   }
+
+  onClickModify() {
+    if (this.note) this.router.navigate(['/home/modify-note', this.note._id]);
+  }
 }
