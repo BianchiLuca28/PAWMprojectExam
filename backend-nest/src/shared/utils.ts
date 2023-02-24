@@ -1,15 +1,19 @@
 import * as bcrypt from 'bcrypt';
 // https://stackoverflow.com/questions/6832445/how-can-bcrypt-have-built-in-salts
 import constants from './../config/constants';
+import keys from './../config/keys';
 import { HttpException, HttpStatus } from '@nestjs/common';
 import * as sanitizeHTML from 'sanitize-html';
 
 export const validatePassword = async (currentPassword, userPassword) => {
-  return bcrypt.compare(currentPassword, userPassword);
+  return bcrypt.compare(currentPassword + keys.passHashSecret, userPassword);
 };
 
 export const hashPassword = async (password) => {
-  return bcrypt.hash(password, constants.bcryptSaltRounds);
+  return bcrypt.hash(
+    password + keys.passHashSecret,
+    constants.bcryptSaltRounds,
+  );
 };
 
 export const sanitizeMongo = function (textJSON: string) {
