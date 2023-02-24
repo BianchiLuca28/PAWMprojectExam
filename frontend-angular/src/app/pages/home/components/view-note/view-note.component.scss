@@ -22,7 +22,10 @@
   background-color: rgb(252, 252, 252);
 }
 
-.card-content p {
-  margin-top: 20px;
+.card-content pre {
+  padding-top: 20px;
   font-size: medium;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  white-space: pre-line;
 }
