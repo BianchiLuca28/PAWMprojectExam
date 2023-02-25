@@ -9,6 +9,7 @@ import { ViewNoteComponent } from './pages/home/components/view-note/view-note.c
 import { AddNoteComponent } from './pages/home/components/add-note/add-note.component';
 import { LogsComponent } from './pages/home/components/logs/logs.component';
 import { ModifyNoteComponent } from './pages/home/components/modify-note/modify-note.component';
+import { AboutComponent } from './pages/about/about.component';
 
 const routes: Routes = [
   {
@@ -54,6 +55,10 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent,
+  },
+  {
+    path: 'about',
+    component: AboutComponent,
   },
 ];
 

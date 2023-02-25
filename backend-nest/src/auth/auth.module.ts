@@ -12,6 +12,7 @@ import constants from './../config/constants';
   imports: [
     UsersModule,
     PassportModule.register({ session: false }),
+    // Configuring the library to use JWT
     JwtModule.register({
       secret: keys.jwtSecret,
       signOptions: { expiresIn: constants.expiryTimeJwt },

@@ -23,6 +23,7 @@ export class AuthService {
     };
 
     try {
+      // Create the user
       await this.usersService.create(userDto);
     } catch (err) {
       status = {
@@ -35,7 +36,7 @@ export class AuthService {
   }
 
   async login(loginUserDto: LoginUserDto): Promise<LoginStatus> {
-    // find user in db
+    // find user in db using email and password
     const user: User = await this.usersService.findByLogin(loginUserDto);
 
     // generate and sign token
@@ -48,6 +49,7 @@ export class AuthService {
   }
 
   async validateUser(payload: JwtPayload): Promise<User> {
+    // Search if a user with the given email exists
     const user = await this.usersService.findByPayload(payload);
     if (!user) {
       throw new HttpException('Invalid token', HttpStatus.UNAUTHORIZED);
@@ -58,6 +60,7 @@ export class AuthService {
   private _createToken({ email, username }: User): any {
     const expiresIn = constants.expiryTimeJwt;
 
+    // Creates the token
     const userJwt: JwtPayload = {
       email: email,
       username: username,

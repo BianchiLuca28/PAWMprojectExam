@@ -36,6 +36,8 @@ import { NotesComponent } from './pages/home/components/notes/notes.component';
 import { AddNoteComponent } from './pages/home/components/add-note/add-note.component';
 import { LogsComponent } from './pages/home/components/logs/logs.component';
 import { ModifyNoteComponent } from './pages/home/components/modify-note/modify-note.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { AboutComponent } from './pages/about/about.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +53,8 @@ import { ModifyNoteComponent } from './pages/home/components/modify-note/modify-
     AddNoteComponent,
     LogsComponent,
     ModifyNoteComponent,
+    FooterComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,

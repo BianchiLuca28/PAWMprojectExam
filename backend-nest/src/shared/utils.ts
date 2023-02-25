@@ -16,6 +16,7 @@ export const hashPassword = async (password) => {
   );
 };
 
+// Checks if the given argument can be used to do a NoSQL Injection
 export const sanitizeMongo = function (textJSON: string) {
   if (textJSON.includes('$')) {
     throw new HttpException('Invalid character: $', HttpStatus.BAD_REQUEST);
@@ -24,6 +25,7 @@ export const sanitizeMongo = function (textJSON: string) {
   }
 };
 
+// Sanite the argument from all HTML tags (to prevent XSS)
 export const sanitize = function (text: string): string {
   return sanitizeHTML(text, {
     allowedTags: [],

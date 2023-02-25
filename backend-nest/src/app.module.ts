@@ -17,6 +17,7 @@ import { join } from 'path';
     AuthModule,
     UsersModule,
     LogsModule,
+    // Serving static files in the directory /www
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'www'),
     }),

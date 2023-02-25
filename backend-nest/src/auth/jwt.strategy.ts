@@ -16,6 +16,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
+  // Validate the received Payload and always extract the User if valid
   async validate(payload: JwtPayload): Promise<User> {
     const user = await this.authService.validateUser(payload);
     if (!user) {

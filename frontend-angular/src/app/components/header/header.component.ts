@@ -12,6 +12,7 @@ export class HeaderComponent {
   subscription: Subscription;
 
   constructor(private authService: AuthService) {
+    // This subscription is used to keep up to date if the user is logged in (to change the content of the buttons)
     this.subscription = this.authService
       .onLogin()
       .subscribe((value) => (this.isUserLoggedIn = value));
