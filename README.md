@@ -25,7 +25,7 @@ There is also the possibility to keep track of the actions performed on the note
 
 # Technology
 
-About the technology used in this application, first of all it's structuerd with a Frontend in Angular and a Backend in Nestjs.
+About the technology used in this application, first of all it's structuerd with a Frontend in Angular and a Backend in NestJS.
 Note also that in the frontend is used Angular Material for a better layout.
 In the backend instead there are some dependecies used, such as: mongoose, bcrypt, class-validator and class-transformer, passport and passport-jwt, sanitize-html and @nestjs/serve-static
 
